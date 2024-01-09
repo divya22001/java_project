@@ -1,0 +1,87 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
+
+public class Hello{
+
+    public static void main(String[] args) {
+        System.out.println("Hello, welcome to Password Generator!");
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("How many letters do you want in your password? ");
+        int noLetters = scanner.nextInt();
+
+        System.out.print("How many numbers do you want in your password? ");
+        int noNumbers = scanner.nextInt();
+
+        System.out.print("How many symbols do you want in your password? ");
+        int noSymbols = scanner.nextInt();
+
+        List<Character> passwordList = new ArrayList<>();
+
+        Random random = new Random();
+
+        for (int i = 0; i < noLetters; i++) {
+            char letter = getRandomChar("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", random);
+            passwordList.add(letter);
+        }
+
+        for (int i = 0; i < noNumbers; i++) {
+            char number = getRandomChar("0123456789", random);
+            passwordList.add(number);
+        }
+
+        for (int i = 0; i < noSymbols; i++) {
+            char symbol = getRandomChar("!@#%&*()", random);
+            passwordList.add(symbol);
+        }
+
+        System.out.println("Password list before shuffling: " + passwordList);
+
+        Collections.shuffle(passwordList);
+
+        System.out.println("Password list after shuffling: " + passwordList);
+
+        StringBuilder password = new StringBuilder();
+        for (char character : passwordList) {
+            password.append(character);
+        }
+
+        System.out.println("Generated Password: " + password.toString());
+    }
+
+    private static char getRandomChar(String characters, Random random) {
+        int index = random.nextInt(characters.length());
+        return characters.charAt(index);
+    }
+}
+
+
+
+
+
+output:
+
+
+PS C:\Users\divya\Desktop\course> javac Hello.java
+PS C:\Users\divya\Desktop\course> java Hello.java
+
+
+
+Hello, welcome to Password Generator!
+
+How many letters do you want in your password? 6
+
+How many numbers do you want in your password? 2
+
+
+How many symbols do you want in your password? 1
+
+Password list before shuffling: [Z, O, K, t, n, T, 1, 0, &]
+
+Password list after shuffling: [O, T, 1, n, K, 0, Z, t, &]
+
+Generated Password: OT1nK0Zt&
